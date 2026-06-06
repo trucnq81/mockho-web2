@@ -50,3 +50,4 @@ to anon
 with check (true);
 Update deploy
 ```
+redeploy fix package
