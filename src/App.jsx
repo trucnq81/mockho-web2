@@ -355,7 +355,8 @@ export default function App() {
           </div>
         </div>
       </footer>
-    </main>
+        </main>
   );
 }
+
 export default App;
