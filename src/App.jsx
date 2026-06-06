@@ -1,24 +1,26 @@
 import { useState } from "react";
-import { supabase } from "./supabaseClient.js";
-
 export default function App() {
   const [bookingSent, setBookingSent] = useState(false);
 
-  async function handleBooking(e) {
-    e.preventDefault();
+ function handleBooking(e) {
+  e.preventDefault();
 
-    const form = e.currentTarget;
+  const form = e.currentTarget;
 
-    const booking = {
-      customer_name: form.name.value,
-      phone: form.phone.value,
-      service: form.service.value,
-      booking_date: form.date.value || null,
-      guests: Number(form.guests.value) || null,
-      note: form.note.value,
-      status: "new",
-      source: "website",
-    };
+  const message = `
+Booking Mộc K'Ho
+Tên: ${form.name.value}
+SĐT: ${form.phone.value}
+Dịch vụ: ${form.service.value}
+Ngày: ${form.date.value}
+Số khách: ${form.guests.value}
+Ghi chú: ${form.note.value}
+  `;
+
+  const zaloUrl = `https://zalo.me/0937376169?text=${encodeURIComponent(message)}`;
+
+  window.location.href = zaloUrl;
+}
 
     const { error } = await supabase.from("bookings").insert([booking]);
 
