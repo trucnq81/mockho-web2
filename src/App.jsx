@@ -1,12 +1,9 @@
 import { useState } from "react";
 export default function App() {
   const [bookingSent, setBookingSent] = useState(false);
-
 function handleBooking(e) {
   e.preventDefault();
-
   const form = e.currentTarget;
-
   const message = `
 Booking Mộc K'Ho
 Tên: ${form.name.value}
@@ -17,16 +14,17 @@ Số khách: ${form.guests.value}
 Ghi chú: ${form.note.value}
   `;
 
-  navigator.clipboard.writeText(message);
-
-  alert("Thông tin booking đã được copy. Bấm OK để mở Zalo và dán nội dung gửi cho Mộc K'Ho.");
+  alert(
+    "Thông tin booking:\n\n" +
+      message +
+      "\n\nBấm OK để mở Zalo và gửi nội dung này cho Mộc K'Ho."
+  );
 
   window.open("https://zalo.me/0937376169", "_blank");
 
   setBookingSent(true);
   form.reset();
 }
-
     const { error } = await supabase.from("bookings").insert([booking]);
 
     if (error) {
