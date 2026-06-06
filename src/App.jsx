@@ -1,9 +1,35 @@
+import { supabase } from "./supabaseClient";
 import { useState } from "react";
 
 export default function App() {
   const [bookingSent, setBookingSent] = useState(false);
 
-  function handleBooking(e) {
+ async function handleBooking(e) {
+  e.preventDefault();
+
+  const form = e.currentTarget;
+
+  const booking = {
+    customer_name: form.name.value,
+    phone: form.phone.value,
+    service: form.service.value,
+    booking_date: form.date.value,
+    guests: Number(form.guests.value),
+    note: form.note.value,
+    status: "new",
+    source: "website"
+  };
+
+  const { error } = await supabase.from("bookings").insert([booking]);
+
+  if (error) {
+    alert("Lỗi gửi booking: " + error.message);
+    return;
+  }
+
+  setBookingSent(true);
+  form.reset();
+}
     e.preventDefault();
     setBookingSent(true);
   }
