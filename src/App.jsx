@@ -13,14 +13,16 @@ export default function App() {
     customer_name: form.name.value,
     phone: form.phone.value,
     service: form.service.value,
-    booking_date: form.date.value,
-    guests: Number(form.guests.value),
+    booking_date: form.date.value || null,
+    guests: Number(form.guests.value) || null,
     note: form.note.value,
     status: "new",
-    source: "website"
+    source: "website",
   };
 
-  const { error } = await supabase.from("bookings").insert([booking]);
+  const { error } = await supabase
+    .from("bookings")
+    .insert([booking]);
 
   if (error) {
     alert("Lỗi gửi booking: " + error.message);
