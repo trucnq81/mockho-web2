@@ -48,4 +48,5 @@ on bookings
 for insert
 to anon
 with check (true);
+Update deploy
 ```
